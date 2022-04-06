@@ -25,6 +25,12 @@ Code in this repository are directly executable and expected to perform in the s
 }
 ```
 
-2. JavaScripthon is an open-sourced Python to JavaScript single-directional translator.
-   Its official GitHub page: https://github.com/metapensiero/metapensiero.pj#introduction
+2. ANTLR4 is used to build TreeParser for Python3 and JavaScript. TreeParser is used to convert raw Python3 or JavaScript programs into string-formatted parse trees.
+   ANTLR4 official website: https://www.antlr.org/
+
+3. JavaScripthon is an open-sourced Python to JavaScript single-directional translator.
+   Its official GitHub repo: https://github.com/metapensiero/metapensiero.pj#introduction
    An online platform built on top of JavaScripthon that allow instant interaction to translate simple funcitons: https://extendsclass.com/python-to-javascript.html
+
+4. js-tokens is an open-sourced JavaScript tokenizer. It is used during evaluation, to analyze the statistics of raw JavaScript programs.
+   js-tokens GitHub repo: https://github.com/lydell/js-tokens
