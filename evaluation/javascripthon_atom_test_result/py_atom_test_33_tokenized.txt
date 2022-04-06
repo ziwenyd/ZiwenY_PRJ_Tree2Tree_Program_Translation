@@ -1,0 +1,7 @@
+function Space atomTest ( ) Space { 
+ TAB var Space a , Space idx 
+ TAB a Space = Space [ 1 , Space 2 , Space 3 , Space 4 ] 
+ TAB idx Space = Space a . index ( 3 ) 
+ TAB return Space idx 
+ } 
+ 

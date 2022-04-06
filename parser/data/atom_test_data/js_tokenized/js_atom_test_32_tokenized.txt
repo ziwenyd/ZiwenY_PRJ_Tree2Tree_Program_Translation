@@ -1,0 +1,5 @@
+function Space atomTest ( ) { 
+ TAB a Space = Space [ 1 , 2 , 3 , 4 ] 
+ TAB length Space = Space a . length 
+ TAB return Space length 
+ }

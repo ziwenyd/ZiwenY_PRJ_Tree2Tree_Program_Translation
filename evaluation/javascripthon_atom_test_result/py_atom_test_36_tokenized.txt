@@ -1,0 +1,10 @@
+function Space atomTest ( ) Space { 
+ TAB var Space x , Space y 
+ TAB x Space = Space 1 
+ TAB y Space = Space "1" 
+ TAB if Space ( ( x . toString ( ) Space === Space y ) ) Space { 
+ TABTAB return Space true 
+ TAB } 
+ TAB return Space false 
+ } 
+ 

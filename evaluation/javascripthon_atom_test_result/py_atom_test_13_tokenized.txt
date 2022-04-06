@@ -1,0 +1,10 @@
+function Space atomTest ( ) Space { 
+ TAB var Space key , Space symbols , Space value 
+ TAB symbols Space = Space { } 
+ TAB symbols [ "I" ] Space = Space 1 
+ TAB symbols [ "V" ] Space = Space 5 
+ TAB key Space = Space "V" 
+ TAB value Space = Space symbols [ key ] 
+ TAB return Space value 
+ } 
+ 

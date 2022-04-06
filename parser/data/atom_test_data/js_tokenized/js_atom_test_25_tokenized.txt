@@ -1,0 +1,6 @@
+function Space atomTest ( ) { 
+ TAB s Space = Space "12345" 
+ TAB max_idx Space = Space s . length Space - Space 1 
+ TAB substr Space = Space s . substring ( 1 , max_idx ) 
+ TAB return Space substr 
+ } 

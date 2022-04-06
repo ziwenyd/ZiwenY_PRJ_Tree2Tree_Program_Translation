@@ -1,0 +1,6 @@
+function Space atomTest ( ) Space { 
+ TAB var Space map 
+ TAB map Space = Space { } 
+ TAB return Space map 
+ } 
+ 

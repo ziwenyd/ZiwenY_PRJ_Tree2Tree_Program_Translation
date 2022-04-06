@@ -1,0 +1,7 @@
+function Space atomTest ( ) Space { 
+ TAB var Space s , Space substr 
+ TAB s Space = Space "12345" 
+ TAB substr Space = Space s . slice ( 2 ) 
+ TAB return Space substr 
+ } 
+ 

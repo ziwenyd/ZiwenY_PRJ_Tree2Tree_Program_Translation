@@ -1,0 +1,7 @@
+function Space atomTest ( ) Space { 
+ TAB var Space a , Space length 
+ TAB a Space = Space [ 1 , Space 2 , Space 3 , Space 4 ] 
+ TAB length Space = Space a . length 
+ TAB return Space length 
+ } 
+ 

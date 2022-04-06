@@ -1,0 +1,11 @@
+function Space atomTest ( ) Space { 
+ TAB var Space count , Space s 
+ TAB s Space = Space [ 1 , Space 2 , Space 3 , Space 4 ] 
+ TAB count Space = Space 0 
+ TAB for Space ( var Space c , Space _pj_c Space = Space 0 , Space _pj_a Space = Space s , Space _pj_b Space = Space _pj_a . length ; Space ( _pj_c Space < Space _pj_b ) ; Space _pj_c Space += Space 1 ) Space { 
+ TABTAB c Space = Space _pj_a [ _pj_c ] 
+ TABTAB count Space += Space 1 
+ TAB } 
+ TAB return Space count 
+ } 
+ 

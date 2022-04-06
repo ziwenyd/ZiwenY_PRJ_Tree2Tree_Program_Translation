@@ -1,0 +1,5 @@
+function Space atomTest ( ) { 
+ TAB a Space = Space [ 1 , 2 , 3 , 4 ] 
+ TAB idx Space = Space a . indexOf ( 3 ) 
+ TAB return Space idx 
+ }

@@ -1,0 +1,9 @@
+function Space atomTest ( ) Space { 
+ TAB s Space = Space "()[]{}" 
+ TAB result Space = Space [ ] 
+ TAB for Space ( c Space of Space s ) { 
+ TABTAB result . push ( c ) 
+ TAB } 
+ TAB return Space result 
+ } 
+ TAB

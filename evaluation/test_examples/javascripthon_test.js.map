@@ -1,0 +1,1 @@
+{"version": 3, "mappings": "AAAA,wBAAe,EAAf,aAAA,QAAA;eACI,CAAMA,CAAN;AADJ", "sources": ["javascripthon_test.py"], "names": ["i"], "sourcesContent": ["for i in range(10):\n    print(i)\n"]}

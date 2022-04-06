@@ -1,0 +1,6 @@
+function Space atomTest ( ) Space { 
+ TAB var Space needle 
+ TAB needle Space = Space "string" 
+ TAB return Space needle . length 
+ } 
+ 

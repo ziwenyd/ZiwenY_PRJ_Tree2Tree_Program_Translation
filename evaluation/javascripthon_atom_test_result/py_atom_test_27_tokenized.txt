@@ -1,0 +1,7 @@
+function Space atomTest ( ) Space { 
+ TAB if Space ( ( true Space || Space false ) ) Space { 
+ TABTAB return Space true 
+ TAB } 
+ TAB return Space false 
+ } 
+ 

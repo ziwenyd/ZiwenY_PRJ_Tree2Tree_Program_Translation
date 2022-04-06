@@ -1,0 +1,9 @@
+function Space atomTest ( ) Space { 
+ TAB var Space x Space = Space 1 
+ TAB var Space y Space = Space 1 
+ TAB var Space z Space = Space 3 
+ TAB if ( x Space == Space y ) { 
+ TABTAB return Space x 
+ TAB } 
+ TAB return Space - 1 
+ }

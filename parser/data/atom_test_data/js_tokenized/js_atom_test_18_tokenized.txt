@@ -1,0 +1,12 @@
+function Space atomTest ( ) Space { 
+ TAB const Space symbols Space = Space new Space Map ( ) 
+ TAB symbols . set ( "I" , Space 1 ) 
+ TAB symbols . set ( "V" , Space 5 ) 
+ TAB key Space = Space "I" 
+ TAB symbols . delete ( key ) 
+ TAB if Space ( symbols . has ( key ) ) { 
+ TABTAB return Space true 
+ TAB } 
+ TAB return Space false 
+ } 
+ TAB

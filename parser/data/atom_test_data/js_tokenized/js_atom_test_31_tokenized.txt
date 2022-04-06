@@ -1,0 +1,7 @@
+function Space atomTest ( ) { 
+ TAB a Space = Space [ 1 , 2 , 3 , 4 ] 
+ TAB if Space ( a . includes ( 1 ) ) { 
+ TABTAB return Space true 
+ TAB } 
+ TAB return Space false 
+ }

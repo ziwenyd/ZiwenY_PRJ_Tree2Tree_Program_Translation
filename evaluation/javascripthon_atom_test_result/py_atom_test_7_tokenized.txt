@@ -1,0 +1,9 @@
+function Space atomTest ( ) Space { 
+ TAB var Space result 
+ TAB result Space = Space [ ] 
+ TAB for Space ( var Space i Space = Space 2 , Space _pj_a Space = Space 10 ; Space ( i Space < Space _pj_a ) ; Space i Space += Space 3 ) Space { 
+ TABTAB result . append ( i ) 
+ TAB } 
+ TAB return Space result 
+ } 
+ 

@@ -1,0 +1,10 @@
+function Space atomTest ( ) Space { 
+ TAB const Space symbols Space = Space new Space Map ( ) 
+ TAB symbols . set ( "I" , Space 1 ) 
+ TAB symbols . set ( "V" , Space 5 ) 
+ TAB key Space = Space "I" 
+ TAB symbols . set ( key , Space 8 ) 
+ TAB new_value Space = Space symbols . get ( key ) 
+ TAB return Space new_value 
+ } 
+ TAB

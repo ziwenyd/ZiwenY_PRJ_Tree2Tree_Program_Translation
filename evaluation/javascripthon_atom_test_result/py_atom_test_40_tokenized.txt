@@ -1,0 +1,9 @@
+function Space atomTest ( ) Space { 
+ TAB var Space s 
+ TAB s Space = Space "" 
+ TAB if Space ( ( s . length Space === Space 0 ) ) Space { 
+ TABTAB return Space true 
+ TAB } 
+ TAB return Space false 
+ } 
+ 

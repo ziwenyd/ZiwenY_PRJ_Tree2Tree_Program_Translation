@@ -1,0 +1,9 @@
+.DS_Store
+tree2tree/data/
+tree2tree/prj/
+tree2tree/.DS_Store
+parser/.DS_Store
+parser/.vscode
+parser/__pycache__
+evaluation/__pycache__
+evaluation/.DS_Store

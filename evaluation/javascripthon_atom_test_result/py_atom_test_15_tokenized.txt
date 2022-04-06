@@ -1,0 +1,30 @@
+var Space _pj 
+ function Space _pj_snippets ( container ) Space { 
+ TAB function Space in_es6 ( left , Space right ) Space { 
+ TABTAB if Space ( ( ( right Space instanceof Space Array ) Space || Space ( ( typeof Space right ) Space === Space "string" ) ) ) Space { 
+ TABTABTAB return Space ( right . indexOf ( left ) Space > Space ( - Space 1 ) ) 
+ TABTAB } Space else Space { 
+ TABTABTAB if Space ( ( ( right Space instanceof Space Map ) Space || Space ( right Space instanceof Space Set ) Space || Space ( right Space instanceof Space WeakMap ) Space || Space ( right Space instanceof Space WeakSet ) ) ) Space { 
+ TABTABTABTAB return Space right . has ( left ) 
+ TABTABTAB } Space else Space { 
+ TABTABTABTAB return Space ( left Space in Space right ) 
+ TABTABTAB } 
+ TABTAB } 
+ TAB } 
+ TAB container [ "in_es6" ] Space = Space in_es6 
+ TAB return Space container 
+ } 
+ _pj Space = Space { } 
+ _pj_snippets ( _pj ) 
+ function Space atomTest ( ) Space { 
+ TAB var Space key , Space symbols 
+ TAB symbols Space = Space { } 
+ TAB symbols [ "I" ] Space = Space 1 
+ TAB symbols [ "V" ] Space = Space 5 
+ TAB key Space = Space "I" 
+ TAB if Space ( _pj . in_es6 ( key , Space symbols ) ) Space { 
+ TABTAB return Space true 
+ TAB } 
+ TAB return Space false 
+ } 
+ 

@@ -1,0 +1,9 @@
+function Space atomTest ( ) Space { 
+ TAB s Space = Space [ 1 , 2 , 3 , 4 ] 
+ TAB count Space = Space 0 
+ TAB for Space ( c Space of Space s ) { 
+ TABTAB count ++ 
+ TAB } 
+ TAB return Space count 
+ } 
+   

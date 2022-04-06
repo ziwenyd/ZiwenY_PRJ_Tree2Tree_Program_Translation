@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "js-tokens": "^7.0.0",
+    "tokenizr": "^1.6.5"
+  }
+}

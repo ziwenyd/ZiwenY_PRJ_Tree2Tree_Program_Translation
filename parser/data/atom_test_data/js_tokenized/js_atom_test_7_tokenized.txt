@@ -1,0 +1,7 @@
+function Space atomTest ( ) { 
+ TAB result Space = Space [ ] 
+ TAB for Space ( let Space i = 2 ; Space i < 10 ; Space i = i + 3 ) { 
+ TABTAB result . push ( i ) 
+ TAB } 
+ TAB return Space result 
+ }

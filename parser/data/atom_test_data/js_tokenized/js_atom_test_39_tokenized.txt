@@ -1,0 +1,13 @@
+function Space atomTest ( ) { 
+ TAB s Space = Space [ 1 , 2 , 3 , 4 , 5 ] 
+ TAB a Space = Space 0 
+ TAB for Space ( let Space i = 0 ; Space i Space < Space s . length ; Space i ++ ) { 
+ TABTAB if Space ( s [ i ] Space < Space s [ i + 1 ] ) { 
+ TABTABTAB a Space = Space s [ i ] 
+ TABTAB } 
+ TABTAB else { 
+ TABTABTAB a Space = Space - 1 
+ TABTAB } 
+ TAB } 
+ TAB return Space a 
+ }

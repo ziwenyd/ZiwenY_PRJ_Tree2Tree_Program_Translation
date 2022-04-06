@@ -1,0 +1,10 @@
+function Space atomTest ( ) Space { 
+ TAB var Space x , Space y 
+ TAB x Space = Space Number . parseFloat ( "inf" ) 
+ TAB y Space = Space 99999999999999 
+ TAB if Space ( ( x Space > Space y ) ) Space { 
+ TABTAB return Space true 
+ TAB } 
+ TAB return Space false 
+ } 
+ 

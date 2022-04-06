@@ -1,0 +1,5 @@
+function Space atomTest ( ) { 
+ TAB a Space = Space [ 1 , 2 , 3 , 4 ] 
+ TAB last_item Space = Space a . pop ( ) 
+ TAB return Space last_item 
+ }

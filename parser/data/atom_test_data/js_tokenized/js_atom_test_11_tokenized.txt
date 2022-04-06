@@ -1,0 +1,5 @@
+function Space atomTest ( ) Space { 
+ TAB const Space map Space = Space new Space Map ( ) 
+ TAB return Space map 
+ } 
+ TAB

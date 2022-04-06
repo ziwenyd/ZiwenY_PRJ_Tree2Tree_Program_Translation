@@ -1,0 +1,5 @@
+function Space atomTest ( ) { 
+ TAB s Space = Space "12345" 
+ TAB substr Space = Space s . substring ( 0 , 4 ) 
+ TAB return Space substr 
+ } 
