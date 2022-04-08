@@ -6,7 +6,6 @@ b'_UNK',3
 b'_NT',4
 b'(',5
 b')',6
-<<<<<<< HEAD
 single_input,7
 compound_stmt,8
 funcdef,9
@@ -201,37 +200,3 @@ moveZeroes,197
 reverseString,198
 left,199
 right,200
-=======
-"Block
-",7
-"If
-",8
-"Op ===
-",9
-"Op +
-",10
-Value IdentifierLiteral,11
-"g
-",12
-"x
-",13
-"Op *
-",14
-Value NumberLiteral,15
-"8
-",16
-"n
-",17
-"s
-",18
-"3
-",19
-"5
-",20
-"Assign
-",21
-"z
-",22
-"c
-",23
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54

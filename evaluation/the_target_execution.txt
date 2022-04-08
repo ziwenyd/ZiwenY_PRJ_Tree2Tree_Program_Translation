@@ -1,0 +1,93 @@
+<FILE>1
+4
+<FILE>10
+[ '(', ')', '[', ']', '{', '}' ]
+<FILE>11
+Map {}
+<FILE>12
+1
+<FILE>13
+5
+<FILE>14
+false
+<FILE>15
+true
+<FILE>16
+8
+<FILE>17
+5
+<FILE>18
+false
+<FILE>19
+2
+<FILE>2
+4
+<FILE>20
+1
+<FILE>21
+123
+<FILE>22
+1234
+<FILE>23
+6
+<FILE>24
+34
+<FILE>25
+234
+<FILE>26
+true
+<FILE>27
+true
+<FILE>28
+2
+<FILE>29
+1
+<FILE>3
+4
+<FILE>30
+-1
+<FILE>31
+true
+<FILE>32
+4
+<FILE>33
+2
+<FILE>34
+4
+<FILE>35
+[ 1, 2, 3 ]
+<FILE>36
+false
+<FILE>37
+true
+<FILE>38
+true
+<FILE>39
+-1
+<FILE>4
+[ 1, 2, 3, 4 ]
+<FILE>40
+true
+<FILE>5
+[
+  0, 1, 2, 3, 4,
+  5, 6, 7, 8, 9
+]
+<FILE>6
+[
+  2, 3, 4, 5,
+  6, 7, 8, 9
+]
+<FILE>7
+[ 2, 5, 8 ]
+<FILE>8
+[
+  10, 9, 8, 7, 6,
+   5, 4, 3, 2, 1
+]
+<FILE>9
+[
+  10, 9, 8, 7, 6,
+   5, 4, 3, 2, 1,
+   0
+]

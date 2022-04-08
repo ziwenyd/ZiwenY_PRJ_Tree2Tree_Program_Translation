@@ -1,1 +1,1 @@
-(program(sourceElements(sourceElement(statement(functionDeclaration(function)(identifier(climbStairs))(()(formalParameterList(formalParameterArg(assignable))(,))())(functionBody({)))))(sourceElement(statement))))
+(program(sourceElements(sourceElement(statement(functionDeclaration(function)(identifier(removeElement))(()(formalParameterList(formalParameterArg(assignable)))())(functionBody({)))))(sourceElement(statement))))

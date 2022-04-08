@@ -20,7 +20,6 @@ import torch.nn.functional as F
 from Tree import *
 
 import data_utils
-import pdb
 
 
 def repackage_state(h):
@@ -407,14 +406,6 @@ class TreeEncoder(nn.Module):
         self.batch_size = batch_size
         self.cuda_flag = cuda.is_available()
 
-        # nn.Embedding:
-        # A simple lookup table that stores embeddings of a fixed dictionary and–– size.
-        # This module is often used to store word embeddings and retrieve them using indices.
-        # The input to the module is a list of indices,
-        # and the output is the corresponding word embeddings.
-        # param1: num_embeddings
-        # param2: embedding dimension / size of each embedding vector
-        # https://pytorch.org/docs/stable/generated/torch.nn.Embedding.html
         self.encoder_embedding = nn.Embedding(
             self.source_vocab_size, self.embedding_size)
 
@@ -463,7 +454,6 @@ class TreeEncoder(nn.Module):
         return encoder_outputs
 
     def forward(self, encoder_managers):
-<<<<<<< HEAD
         """
         Grouping nodes into several groups to calculate encoder_outputs
         The rule of grouping: 
@@ -473,53 +463,24 @@ class TreeEncoder(nn.Module):
                  - Leaf node with no children are considered to have both 
                    children's LSTM states as Zeros.
         """
-=======
-        print('Enter: forward() in TreeEncoder class')
-        # pdb.set_trace()
-        # queue stores info of the
-        # encoder_managers (including all the subtrees of one encoder_manager) from bottom up.
-        # queue: ((encoder_manager_idx, idx, root, children_h, children_c))
-        #         encoder_manager_idx: encoder_managers[idx]
-        #         idx: the idx of one encoder manager's (sub)tree.
-        #         root: the subtree's root
-        #         children_h, children_c: the childeren's lstm state (afteer processing left child and right child)
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54
         queue = []
         head = 0
         max_num_trees = 0
         visited_idx = []
 
-<<<<<<< HEAD
         # Collect the first group of nodes to be calculated.
-=======
-        # process the encoder_managers from bottom up,
-        # calculate the children_h and childern_c for a root, then
-        #  pop into the queue
-        # LSTM of root is not calculated here yet.
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54
         for encoder_manager_idx in range(len(encoder_managers)):
             encoder_manager = encoder_managers[encoder_manager_idx]
             max_num_trees = max(max_num_trees, encoder_manager.num_trees)
             idx = encoder_manager.num_trees - 1
-            # compute embedding for the node from bottom up, so idx from len -> 0
+            # compute embedding for the node from bottom up, idx from len -> 0
             while idx >= 0:
-                # get current subtree of given idx.
-                # LSTM-encoder also compute embeddings of all sub-trees.
                 current_tree = encoder_manager.get_tree(idx)
-
-                # [Question] What does canVisited do?
                 canVisited = True
-                # [Question] I don't understand what the following two if blocks are doing.
                 if current_tree.lchild is not None:
-                    # get left children
                     ltree = encoder_manager.get_tree(current_tree.lchild)
-
                     if ltree.state is None:
-                        # print('left trees lstm state: ', ltree.state)
                         canVisited = False
-                    # else:
-                    #     print('left trees lstm state: ', ltree.state)
-                    #     exit()
                 if current_tree.rchild is not None:
                     rtree = encoder_manager.get_tree(current_tree.rchild)
                     if rtree.state is None:
@@ -574,8 +535,8 @@ class TreeEncoder(nn.Module):
             # stack the encoder_inputs, child_h, child_c of nodes grouped in one group together
             # then calculate the encoder_output of this group together by passing to self.encode().
             while head < len(queue):
-              # encoder_manager_idx: the idx of an encoder_manager in encoder_managers
-              # idx: the idx of a tree in one encoder_manager(TreeManager)
+                # encoder_manager_idx: the idx of an encoder_manager in encoder_managers
+                # idx: the idx of a tree in one encoder_manager(TreeManager)
                 encoder_manager_idx, idx, root, child_h, child_c = queue[head]
                 current_tree = encoder_managers[encoder_manager_idx].get_tree(
                     idx)
@@ -694,8 +655,6 @@ class TreeEncoder(nn.Module):
         init_encoder_outputs = torch.stack(init_encoder_outputs, dim=0)
         init_attention_masks = torch.stack(init_attention_masks, dim=0)
 
-        print('Finished: at the end of the forward() func of TreeEncoder class')
-        # pdb.set_trace()
         return init_encoder_outputs, init_attention_masks, encoder_h_state, encoder_c_state
 
 
@@ -912,10 +871,6 @@ class Tree2TreeModel(nn.Module):
         self.no_pf = no_pf
         self.no_attention = no_attention
         self.cuda_flag = cuda.is_available()
-<<<<<<< HEAD
-=======
-        # print('init, no_pf is', self.no_pf)
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54
 
         if self.dropout_rate > 0:
             self.dropout = nn.Dropout(p=self.dropout_rate)
@@ -1025,7 +980,6 @@ class Tree2TreeModel(nn.Module):
         return output_linear, attention_output
 
     def decode(self, encoder_outputs, attention_masks, init_state, init_decoder_inputs, attention_inputs):
-<<<<<<< HEAD
         """
         called from forward():
         predictions_logits_l, predictions_logits_r, states_l, states_r, attention_outputs_l, attention_outputs_r 
@@ -1035,10 +989,6 @@ class Tree2TreeModel(nn.Module):
 
         This function predicts the t_t(before argmax) value of the left child and right child of a node(BinaryTree).
         """
-=======
-        print('Enter: decode() in Tree2TreeModel class')
-        pdb.set_trace()
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54
         embedding = self.decoder_embedding(init_decoder_inputs)
         state_l = init_state
         state_r = repackage_state(init_state)
@@ -1059,13 +1009,10 @@ class Tree2TreeModel(nn.Module):
             output_l, encoder_outputs, attention_masks)
         prediction_r, attention_output_r = self.predict(
             output_r, encoder_outputs, attention_masks)
-        print('At the end: of the decoder() in Tree2TreeModel class')
-        pdb.set_trace()
         return prediction_l, prediction_r, state_l, state_r, attention_output_l, attention_output_r
 
     def forward(self, encoder_managers, decoder_managers, feed_previous=False):
         """
-<<<<<<< HEAD
           decoder_managers: is a list of TreeManagers, each TreeManager represents one ground truth target data.
           First encode via self.encoder() which calls the forward() function of TreeEncoder.
           The rest of the code acts as the decoder.
@@ -1081,64 +1028,29 @@ class Tree2TreeModel(nn.Module):
         for idx in range(len(decoder_managers)):
             prediction_managers.append(TreeManager())
 
-        # Copy the LSTM state of the source root node and attach to the prediction root node, BinaryTree.root = GO_ID = 1
-=======
-        @param encoder_managers = encoder inputs, a list of encoder_input(A TreeManager of tokenized ast)
-        @param decoder_managers = decoder inputs, a list of decoder_input(A TreeManager of tokenized ast)
-        """
-        print('Enter: forward() in Tree2TreeModel class')
-        pdb.set_trace()
-        # Feed into Encoder, get output of Encoder, which is the input of Decoder.
-        print('Start: feed into TreeEncoder')
-        init_encoder_outputs, init_attention_masks, encoder_h_state, encoder_c_state = self.encoder(
-            encoder_managers)
-        print('init_encoder_outputs.size()', init_encoder_outputs.size())
-        print('init_attention_masks.size()', init_attention_masks.size())
-        print('Finished: get output from TreeEncoder')
-        pdb.set_trace()
-        queue = []
-
-        prediction_managers = []
-        # create empty TreeManagers
-        for idx in range(len(decoder_managers)):
-            prediction_managers.append(TreeManager())
-
-        # 1. The decoder generates the target tree starting from a single root node.
-        # 2. The decoder first copies the LSTM state of the root of the source tree,
-        #     then attaches it to the root node of the target tree.
-        # [Question] xrange is not supported in python3, why the code can still execute?
-        # Tested, the loop runs okay, so left it like this for now.
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54
+        # Copy the LSTM state of the source root node and attach to the prediction root node, 
+        # BinaryTree.root = GO_ID = 1
         for idx in xrange(len(decoder_managers)):
-            # decoder_managers store the target tree (the ground truth)
             current_target_manager_idx = idx
             current_target_idx = 0
             # create a new binary tree in the prediction_managers[idx],
             #   and return the idx of the newly created bianary tree.
             current_prediction_idx = prediction_managers[idx].create_binary_tree(
                 data_utils.GO_ID, None, 0)
-            # copy the LSTM state of the source tree's root node, to the target tree's root node.
+            # copy the LSTM states
             prediction_managers[idx].trees[current_prediction_idx].state = encoder_h_state[idx].unsqueeze(
                 0), encoder_c_state[idx].unsqueeze(0)
-<<<<<<< HEAD
-            # root node, target saves the idx of TreeManager.trees in the corresponding target(ground truth) data.
+
             prediction_managers[idx].trees[current_prediction_idx].target = 0
             queue.append((idx, current_prediction_idx))
 
-        head = 0  # which data sample to process
+        head = 0  
+
         # predictions of all data samples passed into this forward() function,
         # called `per_batch` just because this model is fed with one batch of data each time
-=======
-            # [Question] why store the target to be 0?
-            prediction_managers[idx].trees[current_prediction_idx].target = 0
-            queue.append((idx, current_prediction_idx))
-        head = 0
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54
         predictions_per_batch = []
         EOS_token = Variable(torch.LongTensor([data_utils.EOS_ID]))
-        print('Finished: initialize prediction_managers, copied LSTM state of root node')
-        pdb.set_trace()
-        # 3. The decoder maintains a queue of all nodes to be expanded, and recursively expands each of them.
+   
         while head < len(queue):
             init_h_states = []  # [BinaryTree.state[0]]
             init_c_states = []  # [BinaryTree.state[1]]
@@ -1150,14 +1062,9 @@ class Tree2TreeModel(nn.Module):
             target_seqs_r = []  # [Target BinaryTree.root]
             # Record nodes(BinaryTrees) grouped in each collection, used when expanding one group of nodes.
             tree_idxes = []
-<<<<<<< HEAD
 
             # Collect all Data into one group to be passed into the self.decode() function to be calculated.
             # The initial collection of the first group of nodes to be decoded. Literally all the root nodes of the prediction TreeManagers.
-=======
-            print('Start: processing data before calling decoder')
-            pdb.set_trace()
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54
             while head < len(queue):
                 current_tree = prediction_managers[queue[head][0]].get_tree(
                     queue[head][1])
@@ -1169,9 +1076,7 @@ class Tree2TreeModel(nn.Module):
                 else:
                     target_tree = None
                 if target_tree is not None:
-                    # torch.Size([1, 256])
                     init_h_state = current_tree.state[0]
-                    # torch.Size([1, 256])
                     init_c_state = current_tree.state[1]
                     init_h_state = torch.cat(
                         [init_h_state] * self.num_layers, dim=0)  # torch.Size([1, 256])
@@ -1191,15 +1096,9 @@ class Tree2TreeModel(nn.Module):
                     else:
                         attention_input = current_tree.attention
                     attention_inputs.append(attention_input)
-<<<<<<< HEAD
                     if queue[head][1] == 0:  # if the current expanding node is a root node
                         target_seq_l = target_tree.root
                         # assign the right child of the root node the <EOS> token
-=======
-                    if queue[head][1] == 0:  # for the root node
-                        target_seq_l = target_tree.root
-                        # For the root node of the source & target tree, it always ONLY has ONE children
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54
                         target_seq_r = EOS_token
                     else:  # if not root node
                         if target_tree is not None and target_tree.lchild is not None:
@@ -1217,61 +1116,26 @@ class Tree2TreeModel(nn.Module):
                     attention_masks.append(
                         init_attention_masks[queue[head][0]])
                 head += 1
-<<<<<<< HEAD
-=======
-            print('after the long while loop')
-            #####
-            # After the while loop (before processing these vars in the next following lines),
-            # format of the following variables.
-            # init_h_states = [torch.Tensor]
-            # init_c_states = []
-            # decoder_inputs = []
-            # attention_inputs = []
-            # encoder_outputs = []
-            # attention_masks = []
-            # target_seqs_l = []
-            # target_seqs_r = []
-            # tree_idxes = []
-            #####
-            pdb.set_trace()
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54
             if len(tree_idxes) == 0:
                 break
-            # torch.Size([1, 1, 256])
             init_h_states = torch.stack(init_h_states, dim=1)
-            # torch.Size([1, 1, 256])
             init_c_states = torch.stack(init_c_states, dim=1)
-            # torch.Size([1, 1])
             decoder_inputs = torch.stack(decoder_inputs, dim=0)
-            # torch.Size([1, 1, 256])
             attention_inputs = torch.stack(
                 attention_inputs, dim=0).unsqueeze(1)
-            target_seqs_l = torch.cat(target_seqs_l, 0)  # torch.Size([1])
-            target_seqs_r = torch.cat(target_seqs_r, 0)  # torch.Size([1])
+            target_seqs_l = torch.cat(target_seqs_l, 0)  
+            target_seqs_r = torch.cat(target_seqs_r, 0)  
             if self.cuda_flag:
                 decoder_inputs = decoder_inputs.cuda()
                 target_seqs_l = target_seqs_l.cuda()
                 target_seqs_r = target_seqs_r.cuda()
-            #torch.Size([1, 70, 256])
+
             encoder_outputs = torch.stack(encoder_outputs, dim=0)
-            # torch.Size([1, 70])
             attention_masks = torch.stack(attention_masks, dim=0)
-<<<<<<< HEAD
 
             # Perform Calculation
             predictions_logits_l, predictions_logits_r, states_l, states_r, attention_outputs_l, attention_outputs_r = self.decode(
                 encoder_outputs, attention_masks, (init_h_states, init_c_states), decoder_inputs, attention_inputs)
-=======
-            print('Finished: processing data before calling decoder')
-            pdb.set_trace()
-            print('Start: calling decoder')
-            pdb.set_trace()
-            # 4. for each expanding node, the decoder predict the value of expanding node.
-            predictions_logits_l, predictions_logits_r, states_l, states_r, attention_outputs_l, attention_outputs_r = self.decode(
-                encoder_outputs, attention_masks, (init_h_states, init_c_states), decoder_inputs, attention_inputs)
-            print('Finished: decoder outputs predictions_logits')
-            # (torch.Size([1, 29]), torch.Size([1]))
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54
             predictions_per_batch.append((predictions_logits_l, target_seqs_l))
             predictions_per_batch.append((predictions_logits_r, target_seqs_r))
 
@@ -1338,9 +1202,6 @@ class Tree2TreeModel(nn.Module):
                         # Only generate left node.
                         # BECAUSE for CS-JS, their parse tree always start from a root node with only one children.
                         # expanding the left node of current node, assign values to its LSTM state.
-                        # i: data sample idx
-                        # current_prediction_manager_idx: data sample idx
-                        # current_prediction_idx: sub tree idx of a data sample
                         nxt_l_prediction_idx = prediction_managers[current_prediction_manager_idx].create_binary_tree(
                             predictions_l[i].item(), current_prediction_idx, current_prediction_tree.depth + 1)
                         prediction_managers[current_prediction_manager_idx].trees[
@@ -1354,8 +1215,7 @@ class Tree2TreeModel(nn.Module):
                             nxt_l_prediction_idx].attention = attention_outputs_l[i]
                         queue.append(
                             (current_prediction_manager_idx, nxt_l_prediction_idx))
-                    else:
-                        # expand if not <EOS>
+                    else: # expand if not <EOS>
                         if predictions_l[i].item() != data_utils.EOS_ID:
                             if target_tree is None or target_tree.lchild is None:
                                 nxt_l_prediction_idx = prediction_managers[current_prediction_manager_idx].create_binary_tree(
@@ -1399,43 +1259,20 @@ class Tree2TreeModel(nn.Module):
                         # collect the next group of nodes to be calculated.
                         queue.append(
                             (current_prediction_manager_idx, nxt_r_prediction_idx))
-<<<<<<< HEAD
-=======
-        print('At the end of forward() in Tree2TreeModel class')
-        pdb.set_trace()
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54
         return predictions_per_batch, prediction_managers
 
     def get_batch(self, data, start_idx):
 
         encoder_managers, decoder_managers = [], []
-<<<<<<< HEAD
 
         for i in xrange(self.batch_size):
             if i + start_idx < len(data):
                 encoder_input, decoder_input, encoder_manager, decoder_manager = data[
                     i + start_idx]
             else:
-=======
-        # print('---get batch------------')
-        # print('start idx', start_idx, 'len(data)', len(data))
-        for i in xrange(self.batch_size):
-            # print('  i', i)
-            if i + start_idx < len(data):
-                # print('data[i+start_idx]', i+start_idx)
-                encoder_input, decoder_input, encoder_manager, decoder_manager = data[
-                    i + start_idx]
-            else:
-                # print('data[i + start_idx - len(data)]', i + start_idx - len(data))
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54
                 encoder_input, decoder_input, encoder_manager, decoder_manager = data[i + start_idx - len(
                     data)]
 
             encoder_managers.append(encoder_manager)
             decoder_managers.append(decoder_manager)
-<<<<<<< HEAD
-
-=======
-        # print('---finished get batch---')
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54
         return encoder_managers, decoder_managers

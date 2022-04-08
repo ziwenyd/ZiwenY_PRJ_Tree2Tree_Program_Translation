@@ -6,7 +6,6 @@ b'_UNK',3
 b'_NT',4
 b'(',5
 b')',6
-<<<<<<< HEAD
 program,7
 sourceElements,8
 sourceElement,9
@@ -201,27 +200,3 @@ moveZeroes,197
 reverseString,198
 left,199
 right,200
-=======
-BlockStatement,7
-VariableDeclaration,8
-VariableDeclarator,9
-Identifier,10
-ref,11
-z,12
-IfStatement,13
-&&,14
-===,15
-+,16
-g,17
-x,18
-*,19
-Literal,20
-8,21
-n,22
-=,23
-s,24
-3,25
-5,26
-ExpressionStatement,27
-c,28
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54

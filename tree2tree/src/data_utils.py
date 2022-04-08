@@ -153,21 +153,6 @@ def raw_program_to_token_ids(prog, vocab):
 
 
 def prepare_data(init_data, source_vocab, target_vocab, input_format, output_format, source_serialize, target_serialize):
-<<<<<<< HEAD
-=======
-    """
-    For tree2tree:
-    Input: init_data, dictionary of strings, see a sample in tree2tree/one_object_data/CS-JS/BL/preprocessed_progs_train.json
-    Output: tokenized data, change the vocabulary to a number it is assigned to (mapping is stored in 'vocab')
-
-    This function returns 'data', which is a list of (source_prog, target_prog, source_tree, target_tree) tuples.
-    - source_prog & target_prog: (in t2t)are dictionary of integers, which represents an ast of token ids.
-        -- token ids are taken from the vocabulary built in 'translate.py'. 
-        -- A csv file is also saved in this folder when building vocab. (source_vocab, target_vocab)
-    - source_tree & target_tree: binary tree of type TreeManager. appended into data in 'build_trees' function.
-    """
-    print('Enter: prepare_data() in data_utils.py')
->>>>>>> 792fec1c7f9ef54a5198fcbdb9202b101da94c54
     data = []
     for prog in init_data:
         if input_format == 'seq':

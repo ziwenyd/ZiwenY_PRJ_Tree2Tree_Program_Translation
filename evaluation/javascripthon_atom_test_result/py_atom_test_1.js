@@ -8,4 +8,3 @@ function atomTest() {
     }
     return count;
 }
-

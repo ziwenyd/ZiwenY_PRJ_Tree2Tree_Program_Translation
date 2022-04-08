@@ -1,6 +1,6 @@
 # Tree-to-tree Neural Networks for Program Translation
 
-This repo provides code implementation of Paper [[arXiv](https://arxiv.org/abs/1802.03691)][[NeurIPS](https://papers.nips.cc/paper/7521-tree-to-tree-neural-networks-for-program-translation)]
+This folder provides code implementation of Paper [[arXiv](https://arxiv.org/abs/1802.03691)][[NeurIPS](https://papers.nips.cc/paper/7521-tree-to-tree-neural-networks-for-program-translation)]
 
 The code implementation was initially built by Chent et al. and published with their paper; further extended by Ziwen Yuan as BSc final year project (PRJ) at King's College London, supervised by Kevin Lano.
 
@@ -71,9 +71,10 @@ python3 translate.py --network tree2tree \
 --train_dir ../model_ckpts/tree2tree/ \
 --input_format tree \
 --output_format tree \
---num_epochs 100 \
+--num_epochs 25 \
 --batch_size 5 \
 --steps_per_checkpoint 5 \
+--learning_rate_decay_steps 30 \
 --train_data ../../parser/data/source_py_target_js_train.json \
 --val_data ../../parser/data/source_py_target_js_validation.json
 ```
@@ -91,7 +92,7 @@ python3 translate.py --network tree2tree \
 --train_data ../../parser/data/source_py_target_js_train.json \
 --batch_size 1 \
 --test \
---load_model ../model_ckpts/tree2tree/best_eval_loss_translate_30.ckpt \
+--load_model ../model_ckpts/tree2tree/final_best_eval_loss_translate_30.ckpt \
 --test_data ../../parser/data/source_py_target_js_atom_test.json \
 --input_format tree \
 --output_format tree
@@ -104,7 +105,7 @@ python3 translate.py --network tree2tree \
 --train_data ../one_object_data/PY-JS/source_py_target_js_train.json \
 --batch_size 1 \
 --test \
---load_model ../model_ckpts/tree2tree/best_loss_translate_90.ckpt \
+--load_model ../model_ckpts/tree2tree/final_best_loss_translate_385.ckpt \
 --test_data ../one_object_data/PY-JS/source_py_target_js_atom_test.json \
 --input_format tree \
 --output_format tree

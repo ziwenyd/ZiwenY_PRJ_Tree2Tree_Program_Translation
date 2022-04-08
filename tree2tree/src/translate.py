@@ -210,7 +210,6 @@ def step_tree2tree(model, encoder_inputs, init_decoder_inputs, feed_previous=Fal
 
     predictions_per_batch, prediction_managers = model(
         encoder_inputs, init_decoder_inputs, feed_previous=feed_previous)
-    # print('prediction managers[0]', prediction_managers[0].num_trees)
 
     total_loss = None
     for (predictions, target) in predictions_per_batch:
@@ -224,7 +223,6 @@ def step_tree2tree(model, encoder_inputs, init_decoder_inputs, feed_previous=Fal
 
     if feed_previous:
         output_predictions = []
-        # print('prediction managers', prediction_managers)
         for prediction_manager in prediction_managers:
             output_predictions.append(model.tree2seq(prediction_manager, 1))
 
@@ -239,7 +237,6 @@ def step_tree2tree(model, encoder_inputs, init_decoder_inputs, feed_previous=Fal
         encoder_inputs[idx].clear_states()
 
     if feed_previous:
-        # print('step output predictions', output_predictions)
         return total_loss.item(), output_predictions
     else:
         return total_loss.item()
@@ -264,7 +261,6 @@ def evaluate(model, test_set, source_vocab, target_vocab, source_vocab_list, tar
         # decoder_input is the prediction_tree.root, which is t_t, the prediction result - a token id
         encoder_inputs, decoder_inputs = model.get_batch(
             test_set, start_idx=idx)
-        # print('decoder_inputs[0]', decoder_inputs[0].num_trees)
         if args.network == 'seq2seq' or args.network == 'tree2seq':
             if args.network == 'seq2seq':
                 source_serialize = True
@@ -316,12 +312,9 @@ def evaluate(model, test_set, source_vocab, target_vocab, source_vocab_list, tar
             for j in xrange(len(current_output)):
                 if j >= len(current_target):
                     break
-                # print('c token', current_output[j],
-                #       '- t token', current_target[j])
                 if current_output[j] == current_target[j]:
                     acc_tokens += 1
                 else:
-                    # print('not all correct')
                     all_correct = 0
                     wrong_tokens += 1
             acc_programs += all_correct
@@ -422,7 +415,6 @@ def calculate_tree_depth_statistics(data_set):
     for _, _, sourceTreeManager, targetTreeManager in data_set:
         source_TreeMangers.append(sourceTreeManager)
         target_TreeMangers.append(targetTreeManager)
-    print(source_TreeMangers)
     source_tree_depth = []
     target_tree_depth = []
     for i in range(len(source_TreeMangers)):
@@ -471,8 +463,8 @@ def train(train_data, val_data, source_vocab, target_vocab,
     best_loss_model = None
     best_loss_ckpt_path = ""
     best_loss = float("inf")
-    f = open('train_process_data.csv', 'w', encoding='UTF8')
     # create the csv writer
+    f = open('train_process_data.csv', 'w', encoding='UTF8')
     header = ['step(checkpoint)', 'step_time',
               'loss', 'is_best_loss', 'eval_loss', 'is_best_eval_loss']
     csv_writer = csv.writer(f)
@@ -513,7 +505,6 @@ def train(train_data, val_data, source_vocab, target_vocab,
                         args.train_dir, "best_loss_" + "translate_" + str(current_step) + ".ckpt")
                     csv_row[-1] = 'T'
                     best_loss_model = model.state_dict()
-                step_time, loss = 0.0, 0.0
 
                 encoder_inputs, decoder_inputs = model.get_batch(
                     val_set, start_idx=0)
@@ -540,6 +531,8 @@ def train(train_data, val_data, source_vocab, target_vocab,
                     csv_row[-1] = 'T'
                     best_eval_loss_model = model.state_dict()
                 csv_writer.writerow(csv_row)
+                
+                step_time, loss = 0.0, 0.0
                 sys.stdout.flush()
 
     print('best eval path', best_eval_loss_ckpt_path)
@@ -564,7 +557,7 @@ def test(train_data, test_data, source_vocab, target_vocab, source_vocab_list, t
     print('train data statistics:')
     calculate_tree_depth_statistics(train_set)
     print('test data statistics:')
-    calculate_tree_depth_statistics(test_data)
+    calculate_tree_depth_statistics(test_set)
     evaluate(model, test_set, source_vocab, target_vocab,
              source_vocab_list, target_vocab_list)
 
@@ -631,7 +624,7 @@ parser.add_argument('--val_data', type=str, default='../../parser/data/source_py
 parser.add_argument('--test_data', type=str, default='../../parser/data/source_py_target_js_atom_test.json',
                     help='test data')
 
-# Additional Arguments
+# Additional Arguments added by Ziwen Yuan as part of her project.
 parser.add_argument('--result_dir', default='../result/',
                     help='director to save the translation result.')
 parser.add_argument('--train_process_data_dir', type=str, default='train_process_data.csv',

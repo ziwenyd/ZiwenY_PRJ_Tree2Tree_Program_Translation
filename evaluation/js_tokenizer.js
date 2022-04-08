@@ -58,7 +58,6 @@ while (true){
                 file_tokens.pop()
             }
             file_tokens.push(token_string)
-            
         }
 
         var tokens_str =  file_tokens.join(" ")

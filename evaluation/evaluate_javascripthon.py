@@ -9,8 +9,6 @@ Evaluation Metrics included in this script:
 """
 import os
 
-# token accuracy and program accuray for one (output, target) pair data
-
 
 def token_and_program_accuracy(output, target):
     """
@@ -32,8 +30,6 @@ def token_and_program_accuracy(output, target):
             program_accuracy = 0
             wrong_and_desired_tokens.append([output[i], target[i]])
     return correct_token_num, total_token_num, program_accuracy
-
-# edit distance for one (output, target) pair data
 
 
 def edit_distance(output, target):
@@ -66,9 +62,6 @@ def edit_distance(output, target):
             insertion_cost = OPT[i][j-1] + single_insert_cost
             OPT[i][j] = min(alignment_cost, delete_cost, insertion_cost)
     return OPT[output_len][target_len], output_len
-
-# process '_tokenized.txt' files to save tokens into a list
-
 
 def process_data():
     output_folder = 'javascripthon_atom_test_result/'
@@ -103,9 +96,6 @@ def process_data():
             print('stopped at not-exist file:', output_file_name)
             break
     return outputs, targets
-
-# perform evaluation on the whole dataset and print result in the terminal.
-
 
 def evaluate(outputs, targets):
     """
