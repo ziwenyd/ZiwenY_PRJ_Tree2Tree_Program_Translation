@@ -1,3 +1,42 @@
+# The parser Folder
+
+This folder contains source code of data processing; typically refer to the Dataset chapter of the report.
+
+Source code in this folder serves the following objectives:
+
+0. Contains dataset
+   0.1 dataset are all saved under /parser/data, folder structure is:
+   /data/train_data/py
+   /data/train_data/js
+   /data/train_data/py_ast_str
+   /data/train_data/js_ast_str
+
+   /data/validation_data/py
+   /data/validation_data/js
+   /data/validation_data/py_ast_str
+   /data/validation_data/js_ast_str
+
+   /data/atom_test_data/py
+   /data/atom_test_data/js
+   /data/atom_test_data/py_ast_str
+   /data/atom_test_data/js_ast_str
+   /data/atom_test_data/write_atom_test_feature.py:store which atom test data represent which features.
+   /data/atom_test_data/atom_test_feature.csv: result of the previous file.
+
+   /data/source_py_target_js_train.json
+   /data/source_py_target_js_validation.json
+   /data/source_py_target_js_atom_test.json
+
+1. Build .json file in the desired format as Tree2Tree input, for training data, validation data, and atom test data.
+   1.1 parse_data_atom_test.sh, parse_data_train.sh, parse_data_valid.sh: generate string-formatted parse trees for a the raw data folder recursively. (saved under /parser/data/xx_data/xx_ast_str, postfixed as '\_ast_str.txt').
+   1.1.1 python_parser/TreeParser: the parser to obtain Python3 parse tree
+   1.1.2 javascript_parser/TreeParser: the parser to obtain JavaScript parse tree
+   1.1.3 validate_python.py: check all Python raw programs have 2 black lines at the end
+   1.2 build_json_from_parse_tree: build .json file as input of the Tree2Tree model, uses the ast_str.txt files built in 1.1.
+2. Dataset Statistics Calculation, which is used in the Evaluation chapter in the report.
+   2.1 javascript_tokenizer.js: tokenize raw Javascript program; calcualte statistics; print to the terminal.
+   2.2 raw_program_analyzer.py: tokenizer raw Python program; calcualte statistics; print to the terminal.
+
 # Convert Raw Progrms into JSON
 
 ## Train

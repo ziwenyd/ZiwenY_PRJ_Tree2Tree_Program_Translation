@@ -1,8 +1,21 @@
-# Tree-to-tree Neural Networks for Program Translation
+# The tree2tree Folder
 
-This folder provides code implementation of Paper [[arXiv](https://arxiv.org/abs/1802.03691)][[NeurIPS](https://papers.nips.cc/paper/7521-tree-to-tree-neural-networks-for-program-translation)]
+This folder provides code implementation of the Tree2Tree model [[arXiv](https://arxiv.org/abs/1802.03691)][[NeurIPS](https://papers.nips.cc/paper/7521-tree-to-tree-neural-networks-for-program-translation)], refers to the Model Design and Implementation chapter in the report.
 
-The code implementation was initially built by Chent et al. and published with their paper; further extended by Ziwen Yuan as BSc final year project (PRJ) at King's College London, supervised by Kevin Lano.
+This folder follows the following file structure:
+
+1. model_ckpts/tree2tree/: where the trained model will be saved
+2. result/: where the translation result outputed from a trained Tree2Tree model will be saved.
+3. utils/dataset_splitter/: a simple Python script that can split a large json file to a smaller one.
+4. src/: the source code of the Tree2Tree implementation
+   4.1 src/translate.py: the main control file of the Tree2Tree model. All interactions from user to the model starts from this file.
+   4.2 src/network.py: contains model design. specifically, the TreeEncoder and Tree2TreeModel, used in this project.
+   4.3 src/Tree.py: contains classes defining Tree structure. Specifically, the BinaryTree and TreeManger, used in this project.
+   4.4 src/data_utils.py: contains data processing functions.
+
+# Citation
+
+The code implementation in this folder was initially built by Chent et al. and published with their paper; further extended by Ziwen Yuan as BSc final year project (PRJ) at King's College London, supervised by Kevin Lano.
 
 Chen et al. Paper Citation:
 
@@ -71,10 +84,9 @@ python3 translate.py --network tree2tree \
 --train_dir ../model_ckpts/tree2tree/ \
 --input_format tree \
 --output_format tree \
---num_epochs 25 \
+--num_epochs 100 \
 --batch_size 5 \
 --steps_per_checkpoint 5 \
---learning_rate_decay_steps 30 \
 --train_data ../../parser/data/source_py_target_js_train.json \
 --val_data ../../parser/data/source_py_target_js_validation.json
 ```
@@ -92,7 +104,7 @@ python3 translate.py --network tree2tree \
 --train_data ../../parser/data/source_py_target_js_train.json \
 --batch_size 1 \
 --test \
---load_model ../model_ckpts/tree2tree/final_best_eval_loss_translate_30.ckpt \
+--load_model ../model_ckpts/tree2tree/best_eval_loss_translate_30.ckpt \
 --test_data ../../parser/data/source_py_target_js_atom_test.json \
 --input_format tree \
 --output_format tree
@@ -105,7 +117,7 @@ python3 translate.py --network tree2tree \
 --train_data ../one_object_data/PY-JS/source_py_target_js_train.json \
 --batch_size 1 \
 --test \
---load_model ../model_ckpts/tree2tree/final_best_loss_translate_385.ckpt \
+--load_model ../model_ckpts/tree2tree/best_loss_translate_90.ckpt \
 --test_data ../one_object_data/PY-JS/source_py_target_js_atom_test.json \
 --input_format tree \
 --output_format tree

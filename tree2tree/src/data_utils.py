@@ -176,22 +176,14 @@ def prepare_data(init_data, source_vocab, target_vocab, input_format, output_for
         data.append((source_prog, target_prog))
     if input_format == 'tree' and (not source_serialize):
         data = build_trees(data, target_serialize)
-    print(
-        'Finished: prepared data of [(source, target, sourceTreeManager, targetTreeManager)]')
-    # pdb.set_trace()
     return data
 
 
 def build_trees(init_dataset, target_serialize=False):
     data_set = []
-    print('Enter: build_trees() in data_utils.py')
-    # pdb.set_trace()
     for (source, target) in init_dataset:
         source_trees = TreeManager()
         source_trees.build_binary_tree_from_dict(source)
-        # print('source', source)
-        # source_trees.print_root_tree()
-        # pdb.set_trace()
         if target_serialize:
             target_seq = target[:]
             data_set.append((source, target, source_trees, target_seq))
@@ -199,5 +191,4 @@ def build_trees(init_dataset, target_serialize=False):
             target_trees = TreeManager()
             target_trees.build_binary_tree_from_dict(target)
             data_set.append((source, target, source_trees, target_trees))
-    # pdb.set_trace()
     return data_set

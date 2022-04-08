@@ -10,12 +10,24 @@ One can also use this script to convert one single file
 or a specific ast string for test purpose.
 
 Commands to generate `train`, `validation`, `atom test` input for Tree2Tree model
-are available in README.md to copy paste straight-away.
+are available in README.md to copy paste straight-away, also listed in the following.
+
+# Train data
+python3 build_json_from_parse_tree.py
+
+# Validation data
+python3 build_json_from_parse_tree.py \
+--folder validation_data \
+--result_file_name source_py_target_js_validation
+
+# Atom Test data
+python3 build_json_from_parse_tree.py \
+--folder atom_test_data \
+--result_file_name source_py_target_js_atom_test
 """
 import os
 import json
 import argparse
-import pdb
 
 def build_dict_ast(token_list):
     stack = []
@@ -192,14 +204,13 @@ def program_test():
     py_file = open(py_file_name, 'r')
     ast = py_file.read()
     # ast = "(iterationStatement for ( (variableDeclarationList varModifier variableDeclaration) ; (expressionSequence (singleExpression singleExpression < (singleExpression nums . length))) ; (expressionSequence (singleExpression i ++)) ) )"
-    # print("ast str:", ast)
+    print("ast str:", ast)
     ast_token = get_token_list(ast, py_file_name)
     print("ast token", ast_token)
     ast_dict = build_dict_ast(ast_token)
     print("ast dict", ast_dict)
 
 if __name__ == '__main__':
-    # test()
     # program_test()
     if args.example:
         write_one_json()
